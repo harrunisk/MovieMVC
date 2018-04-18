@@ -1,0 +1,90 @@
+﻿@model IEnumerable<movieMvc.Models.List>
+@{
+    ViewBag.Title = "NewsIndex2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--
+author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+    <!-- faq-banner -->
+    <div class="faq">
+        <div class="container">
+            <div class="agileits-news-top">
+                <ol class="breadcrumb">
+                    <li>@Html.ActionLink("Anasayfa", "Index", "Home")</li>
+                    <li class="active">Lists</li>
+                </ol>
+            </div>
+            <div class="agileinfo-news-top-grids">
+                <div class="col-md-8 wthree-top-news-left">
+                    <div class="wthree-news-left">
+                        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home1" id="home1-tab" role="tab" data-toggle="tab" aria-controls="home1" aria-expanded="true">Lists</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="home1" aria-labelledby="home1-tab">
+                                   
+                                    <div class="wthree-news-top-left">
+                                             @foreach (var item in Model)
+                                             {
+                                               
+                                        <div class="col-md-6 w3-agileits-news-left">
+                                            <div class="col-sm-5 wthree-news-img">
+                                                <a href=" @Url.Action("Details", "Lists", new { id = item.ListID })"><img src="@Url.Action("BringPhoto", "Movies", new { PhotoID = item.ListPhotos.FirstOrDefault().PhotoID })" alt="" /></a>
+                                            </div>
+                                            
+                                            <div class="col-sm-7 wthree-news-info">
+                                                <h5><a href="@Url.Action("Details", "Lists", new { id = item.ListID })">@Html.DisplayFor(modelItem => item.ListTitle)</a></h5>
+                                                
+                                            </div>
+                                            <div class="clearfix"> </div>
+                                        </div>
+
+                                        <div class="clearfix"> </div>
+                                        <br />
+
+
+
+                                             }
+                                        
+                                       
+                                       
+                                    
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- //faq-banner -->
+
+
+
+
+</body>
+</html>
+
+

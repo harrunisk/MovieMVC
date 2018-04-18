@@ -1,0 +1,245 @@
+﻿@model movieMvc.Models.Movie
+
+@{
+    ViewBag.Title = movieMvc.Resources.Home.Details;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var MoviePhotosList = (List<movieMvc.Models.Photo>)ViewData["MoviePhotosList"];
+
+}
+@{
+    var MovieArtistList = (List<movieMvc.Models.Artist>)ViewData["MovieArtistList"];
+
+}
+@{
+    var Result = (Boolean)ViewData["Result"];
+
+}
+@{
+    var Role = (String)ViewData["Role"];
+
+}
+
+
+
+
+<h2>@movieMvc.Resources.Home.MoviePhotos</h2>
+<div class="banner-bottom">
+    <div class="container">
+        <div class="w3_agile_banner_bottom_grid">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+
+                @foreach (var item in MoviePhotosList)
+                {
+                <div class="item">
+                    <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+
+                        <img src="@Url.Action("BringPhoto", "Movies", new { PhotoID = item.PhotoID })" title="album-name" class="img-responsive" alt=" ">
+
+
+                        @if (Role == "Admin")
+
+    {
+        var willDelete = Model.MoviePhoto.Where(x => x.PhotoID == item.PhotoID).Select(y => y.Id).FirstOrDefault();
+
+
+                    @Html.ActionLink("Remove From Movie", "Delete", new { controller = "MoviePhotos", id = willDelete })
+}
+
+
+                    </div>
+                    
+
+                </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>@movieMvc.Resources.Home.MovieArtists</h2>
+<div class="banner-bottom">
+    <div class="container">
+        <div class="w3_agile_banner_bottom_grid">
+            <div id="owl-demo2" class="owl-carousel owl-theme">
+
+                @foreach (var item in MovieArtistList)
+                {
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                            <a href="@Url.Action("Details", "Artists", new { id = item.ArtistID })" class="hvr-shutter-out-horizontal">
+
+                                <img src="@Url.Action("ArtistPhotos", "Artists", new { ArtistID = item.ArtistID })" title="album-name" class="img-responsive" alt=" ">
+                                <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                <div class="w3l-movie-text">
+                                    <h6><a href="@Url.Action("Details", "Artists", new { id = item.ArtistID })">@Html.DisplayFor(modelItem => item.ArtistName)</a></h6>
+                                </div>
+                                <div class="mid-2 agile_mid_2_home">
+                                    <p>@Html.DisplayFor(modelItem => item.ArtistBirth)</p>
+                                    <div class="block-stars">
+                                        <ul class="w3l-ratings">
+                                            @for (int i = 0; i < (int)Math.Ceiling(item.ArtisGeneralScore / 2); i++)
+                    {
+                        <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+}
+
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                            @if (Role == "Admin")
+
+                            { var willDelete = Model.ArtistMovie.Where(x => x.ArtistID == item.ArtistID).Select(y => y.Id).FirstOrDefault();
+
+
+                                @Html.ActionLink("Remove From Movie", "Delete", new { controller="ArtistMovies",id=willDelete})
+}
+
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr />
+
+<h2>@movieMvc.Resources.Home.Details</h2>
+
+
+<div>
+
+
+    <div>
+        <dl class="dl-horizontal">
+
+
+
+
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieReleaseDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieReleaseDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieGeneralScore)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieGeneralScore)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieGenre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieGenre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieDirector)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieDirector)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieTrailer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieTrailer)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieInformation)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieInformation)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MovieDuration)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MovieDuration)
+            </dd>
+
+
+        </dl>
+    </div>
+
+</div>
+<p>
+
+    @if (Result == true && Role=="User")
+    {
+
+        //başka controllerden function çağırırken
+        @Html.ActionLink(@movieMvc.Resources.Home.Remove, "DeleteUserMovie", "Manage", new { MovieID = Model.MovieID }, null)
+
+    }
+    else if(Result == false && Role == "User")
+    {
+        @Html.ActionLink(@movieMvc.Resources.Home.AddMyFavoriteList, "AddUserMovie", "Manage", new { MovieID = Model.MovieID }, null)
+
+    }
+
+    @if (Role == "Admin")
+    { 
+    @Html.ActionLink(@movieMvc.Resources.Home.Edit, "Edit", new { id = Model.MovieID }) 
+       <div><br /></div>
+    @Html.ActionLink(@movieMvc.Resources.Home.BackToList, "Index")
+    }
+</p>

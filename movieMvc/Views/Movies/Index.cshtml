@@ -1,0 +1,89 @@
+﻿@model IEnumerable<movieMvc.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieGeneralScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieGenre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieDirector)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieTrailer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieInformation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieDuration)
+        </th>
+        <th></th>
+    </tr>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieGeneralScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieGenre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieDirector)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieTrailer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieInformation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieDuration)
+        </td>
+        <td>
+            <img src="@Url.Action("MoviesPhotos", "Movies",new {MovieID=item.MovieID })" style="width:160px;height:160px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0px 0px 20px #888;" />
+        </td>
+        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MovieID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MovieID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MovieID })
+        </td>
+       
+    </tr>
+   
+}
+
+</table>

@@ -1,0 +1,59 @@
+﻿@model movieMvc.Models.News
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    var NewsPhoto = (int)ViewData["NewsPhoto"];
+
+}
+@{
+    var Result = (Boolean)ViewData["Result"];
+
+}
+@{
+    var Role = (String)ViewData["Role"];
+
+}
+<br />
+<h2>@Html.DisplayFor(model => model.NewsTitle)</h2>
+<div>@Html.DisplayFor(model => model.NewsDate)</div>
+
+
+
+
+
+
+@*buarada Model.NewssPhoto.FirstOrDefault().PhotoID NewsPhoto sınıfından sadece bizim modelin ID sinin içinde bulunduğu NewsPhoto elemanını çekiyor*@
+<img src="@Url.Action("BringPhoto", "Movies", new { PhotoID = Model.NewssPhoto.FirstOrDefault().PhotoID })" title="album-name" class="img-responsive" alt=" ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+    <br />
+    @Html.DisplayFor(model => model.NewsContent)
+
+
+</div>
+<br />
+<p>
+    @if (Role == "Admin")
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.NewsID })
+        <br />
+        @Html.ActionLink("Back to List", "Index")
+    }
+</p>

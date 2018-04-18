@@ -1,0 +1,134 @@
+﻿@model IEnumerable<movieMvc.Models.News>
+@{
+    ViewBag.Title = "NewsIndex2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--
+author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+    <!-- faq-banner -->
+    <div class="faq">
+        <div class="container">
+            <div class="agileits-news-top">
+                <ol class="breadcrumb">
+                    <li>@Html.ActionLink("Anasayfa", "Index", "Home")</li>
+                    <li class="active">Haberler</li>
+                </ol>
+            </div>
+            <div class="agileinfo-news-top-grids">
+                <div class="col-md-8 wthree-top-news-left">
+                    <div class="wthree-news-left">
+                        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home1" id="home1-tab" role="tab" data-toggle="tab" aria-controls="home1" aria-expanded="true">Son Haberler</a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="home1" aria-labelledby="home1-tab">
+                                   
+                                    <div class="wthree-news-top-left">
+                                             @foreach (var item in Model)
+                                                     {
+
+                                        <div class="col-md-6 w3-agileits-news-left">
+                                            <div class="col-sm-5 wthree-news-img">
+                                                <a href=" @Url.Action("Details", "News", new { id = item.NewsID })"><img src="@Url.Action("BringPhoto", "Movies", new { PhotoID = item.NewssPhoto.FirstOrDefault().PhotoID })" alt="" /></a>
+                                            </div>
+                                            <div class="col-sm-7 wthree-news-info">
+                                                <h5><a href="@Url.Action("Details", "News", new { id = item.NewsID })">@Html.DisplayFor(modelItem => item.NewsTitle)</a></h5>
+                                                <p style="overflow:hidden; white-space:nowrap; text-overflow: ellipsis;">@Html.DisplayFor(modelItem => item.NewsContent)</p>
+                                                <ul>
+                                                    <li><i class="fa fa-clock-o" aria-hidden="true"></i> @Html.DisplayFor(modelItem => item.NewsDate)</li>
+                                                </ul>
+                                            </div>
+                                            <div class="clearfix"> </div>
+                                            <br />
+                                        </div>
+                                        
+                                                                            }
+                                        
+                                       
+                                        
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 wthree-news-right">
+                    <!-- news-right-top -->
+                    <div class="news-right-top">
+                        <div class="wthree-news-right-heading">
+                            <h3>Updated News</h3>
+                        </div>
+                        <div class="wthree-news-right-top">
+                            <div class="news-grids-bottom">
+                                <!-- date -->
+                                <div id="design" class="date">
+                                    <div id="cycler">
+                                        @foreach (var item in Model.OrderByDescending(x => x.NewsDate))
+                                        {
+                                        <div class="date-text">
+                                            <a href=" @Url.Action("Details", "News", new { id = item.NewsID })">@Html.DisplayFor(modelItem => item.NewsDate)</a>
+                                            <p>@Html.DisplayFor(modelItem => item.NewsTitle)</p>
+                                        </div>
+                                        }
+
+                                    </div>
+                                    <script>
+										function blinker() {
+											$('.blinking').fadeOut(500);
+											$('.blinking').fadeIn(500);
+										}
+										setInterval(blinker, 1000);
+                                    </script>
+                                    <script>
+											function cycle($item, $cycler){
+												setTimeout(cycle, 2000, $item.next(), $cycler);
+
+												$item.slideUp(1000,function(){
+													$item.appendTo($cycler).show();
+												});
+												}
+											cycle($('#cycler div:first'),  $('#cycler'));
+                                    </script>
+                                </div>
+                                <!-- //date -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //news-right-top -->
+                    <!-- news-right-bottom -->
+                    
+                    <!-- //news-right-bottom -->
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- //faq-banner -->
+
+
+
+
+</body>
+</html>
+
+

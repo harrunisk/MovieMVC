@@ -1,0 +1,66 @@
+﻿@model IEnumerable<movieMvc.Models.Artist>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtistName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtistBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtistPlaceOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtistBiography)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtisGeneralScore)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistPlaceOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistBiography)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtisGeneralScore)
+        </td>
+        <td>
+<img src="@Url.Action("ArtistPhotos", "Artists",new {ArtistID=item.ArtistID })" style="width:160px;height:160px; background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    border-radius: 100px;
+    padding: 6px;
+    box-shadow: 0px 0px 20px #888;" />
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ArtistID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ArtistID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ArtistID })
+        </td>
+    </tr>
+}
+
+</table>

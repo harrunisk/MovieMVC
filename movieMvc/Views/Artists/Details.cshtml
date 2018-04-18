@@ -1,0 +1,126 @@
+﻿@model movieMvc.Models.Artist
+
+@{
+    ViewBag.Title = movieMvc.Resources.Home.Details;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var ArtistPhotoList = (List<movieMvc.Models.Photo>)ViewData["ArtistPhotoList"];
+
+}
+@{
+    var Result = (Boolean)ViewData["Result"];
+
+}
+@{
+    var Role = (String)ViewData["Role"];
+
+}
+
+<h2>@movieMvc.Resources.Home.ArtistPhotos</h2>
+<div class="banner-bottom">
+    <div class="container">
+        <div class="w3_agile_banner_bottom_grid">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+
+                @foreach (var item in ArtistPhotoList)
+                {
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+
+                            <img src="@Url.Action("BringPhoto", "Movies", new { PhotoID = item.PhotoID })" title="album-name" class="img-responsive" alt=" ">
+                            @if (Role == "Admin")
+
+    {
+        var willDelete = Model.ArtistPhoto.Where(x => x.PhotoID == item.PhotoID).Select(y => y.Id).FirstOrDefault();
+
+
+                        @Html.ActionLink("Remove Photo", "Delete", new { controller = "ArtistPhotoes", id = willDelete })
+}
+
+
+
+                        </div>
+
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtistName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtistBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistPlaceOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtistPlaceOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistBiography)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtistBiography)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtisGeneralScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtisGeneralScore)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   
+
+    @if (Result == true && Role == "User")
+    {
+
+        //başka controllerden function çağırırken
+        @Html.ActionLink("Remove", "DeleteUserArtist", "Manage", new { ArtistID = Model.ArtistID }, null)
+
+    }
+    else if (Result == false && Role == "User")
+    {
+        @Html.ActionLink("Add to My Favorite List", "AddUserArtist", "Manage", new { ArtistID = Model.ArtistID }, null)
+
+    }
+
+    @if (Role == "Admin")
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ArtistID })
+        <br />
+        @Html.ActionLink("Back to List", "Index")
+    }
+</p>

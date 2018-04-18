@@ -1,0 +1,234 @@
+﻿@model movieMvc.Models.IndexViewModel
+
+
+@{
+    ViewBag.Title = "Admin Page";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+
+
+    <hr />
+    <h3><b>About Me</b></h3>
+    <dl class="dl-horizontal">
+        <dt>Email:</dt>
+        <dd><p>@Model.Mail</p></dd>
+        <dt>Sex:</dt>
+        <dd><p>@Model.Sex</p></dd>
+        <dt>Register Date:</dt>
+        <dd><p>@Model.RegisterDate</p></dd>
+        <dt>Date Of Birth:</dt>
+        <dd><p>@Model.Birth</p></dd>
+        <dt>Date Of Id:</dt>
+        <dd><p>@Model.Id</p></dd>
+
+
+
+
+
+
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    </dl>
+    <hr />
+
+    <h3><b>User Favorite Movies</b></h3>
+    <div class="banner-bottom">
+        <div class="container">
+            <div class="w3_agile_banner_bottom_grid">
+                <div id="owl-demo" class="owl-carousel owl-theme">
+
+                    @foreach (var item in Model.UserFavoriteMovieList)
+                    {
+                        <div class="item">
+                            <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                                <a href="@Url.Action("Details", "Movies", new { id = item.MovieID })" class="hvr-shutter-out-horizontal">
+
+                                    <img src="@Url.Action("MoviesPhotos", "Movies", new { MovieID = item.MovieID })" title="album-name" class="img-responsive" alt=" ">
+                                    <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                </a>
+                                <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                    <div class="w3l-movie-text">
+                                        <h6><a href="@Url.Action("Details", "Movies", new { id = item.MovieID })">@Html.DisplayFor(modelItem => item.MovieName)</a></h6>
+                                    </div>
+                                    <div class="mid-2 agile_mid_2_home">
+                                        <p>@Html.DisplayFor(modelItem => item.MovieReleaseDate)</p>
+                                        <div class="block-stars">
+                                            <ul class="w3l-ratings">
+                                                @for (int i = 0; i < (int)Math.Ceiling(item.MovieGeneralScore / 2); i++)
+                                                {
+                                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div>
+
+                                        @Html.ActionLink("Remove", "DeleteUserMovie", new { MovieID = item.MovieID })
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h3><b>User Favorite Artists</b></h3>
+    <div class="banner-bottom">
+        <div class="container">
+            <div class="w3_agile_banner_bottom_grid">
+                <div id="owl-demo2" class="owl-carousel owl-theme">
+
+                    @foreach (var item in Model.UserFavoriteArtistList)
+                    {
+                        <div class="item">
+                            <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                                <a href="@Url.Action("Details", "Artists", new { id = item.ArtistID })" class="hvr-shutter-out-horizontal">
+
+                                    <img src="@Url.Action("ArtistPhotos", "Artists", new { ArtistID = item.ArtistID })" title="album-name" class="img-responsive" alt=" ">
+                                    <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                </a>
+                                <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                    <div class="w3l-movie-text">
+                                        <h6><a href="@Url.Action("Details", "Artists", new { id = item.ArtistID })">@Html.DisplayFor(modelItem => item.ArtistName)</a></h6>
+                                    </div>
+                                    <div class="mid-2 agile_mid_2_home">
+                                        <p>@Html.DisplayFor(modelItem => item.ArtistBirth)</p>
+                                        <div class="block-stars">
+                                            <ul class="w3l-ratings">
+                                                @for (int i = 0; i < (int)Math.Ceiling(item.ArtisGeneralScore / 2); i++)
+                                                {
+                                                    <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                }
+
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div>
+
+                                        @Html.ActionLink("Remove", "DeleteUserArtist", new { ArtistID = item.ArtistID })
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <td>
+
+
+                            <h3><b>Comment:</b></h3>   @{Html.RenderAction("GetCommentArtist", "Manage", new { ArtistID = item.ArtistID });}
+
+                        </td>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+
+
+
+
+
+    <h3><b>Settings</b><br /></h3>
+
+
+
+
+
+    <p></p>
+    <dl class="dl-horizontal">
+
+
+
+        <dt>Password:</dt>
+        <dd>
+            [
+
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create", "SetPassword")
+            }
+            ]
+        </dd>
+        <dt>External Logins:</dt>
+        <dd>
+            @Model.Logins.Count [
+            @Html.ActionLink("Manage", "ManageLogins") ]
+        </dd>
+        @*
+            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+             Uncomment the following block after you have set up two-factor authentication
+        *@
+        @*
+            <dt>Phone Number:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "None")
+                @if (Model.PhoneNumber != null)
+                {
+                    <br />
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                    }
+                }
+                else
+                {
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                }
+            </dd>
+        *@
+        <dt>Two-Factor Authentication:</dt>
+        <dd>
+            <p>
+                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication.
+            </p>
+            @*@if (Model.TwoFactor)
+                {
+                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Enabled
+                        <input type="submit" value="Disable" class="btn btn-link" />
+                        </text>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Disabled
+                        <input type="submit" value="Enable" class="btn btn-link" />
+                        </text>
+                    }
+                }*@
+        </dd>
+    </dl>
+
+
+
+
+
+</div>
+

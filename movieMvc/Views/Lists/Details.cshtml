@@ -1,0 +1,78 @@
+﻿@model movieMvc.Models.List
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var Result = (Boolean)ViewData["Result"];
+
+}
+@{
+    var Role = (String)ViewData["Role"];
+
+}
+
+@{
+    var ListPhoto = (int)ViewData["ListPhoto"];
+
+}
+<br />
+
+
+<br />
+@*<img src="@Url.Action("BringPhoto", "Movies", new { PhotoID = ListPhoto })" title="album-name" class="img-responsive" alt=" " style="width:150px;height:150px;">*@
+
+
+
+<h3><b>Movies Of @Html.DisplayFor(model => model.ListTitle)</b></h3>
+<div class="banner-bottom">
+    <div class="container">
+        <div class="w3_agile_banner_bottom_grid">
+            <div id="owl-demo" class="owl-carousel owl-theme">
+
+                @foreach (var item in Model.ListContent)
+                {
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                            <a href="@Url.Action("Details", "Movies", new { id = item.MovieID })" class="hvr-shutter-out-horizontal">
+
+                                <img src="@Url.Action("MoviesPhotos", "Movies", new { MovieID = item.MovieID })" title="album-name" class="img-responsive" alt=" ">
+                                <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                @if (Role == "Admin")
+
+    {
+        var willDelete = Model.ListContent.Where(x => x.MovieID == item.MovieID).Select(y => y.Id).FirstOrDefault();
+
+
+                            @Html.ActionLink("Remove Movie From List", "Delete", new { controller = "ListContents", id = willDelete })
+                                }
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+
+
+
+
+
+
+
+<p>
+    @if (Role == "Admin")
+    { @Html.ActionLink("Edit", "Edit", new { id = Model.ListID })
+            <br />
+            @Html.ActionLink("Back to List", "Index")}
+</p>

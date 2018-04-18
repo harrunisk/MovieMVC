@@ -1,0 +1,201 @@
+﻿@model IEnumerable<movieMvc.Models.Movie>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@{ 
+    var moviesOrderedByDescedingScore = (List<movieMvc.Models.Movie>)ViewData["moviesOrderedByDescedingScore"];
+
+}
+
+@{
+    var moviesOrderedByDate = (List<movieMvc.Models.Movie>)ViewData["moviesOrderedByDate"];
+
+}
+
+
+
+<body>
+    <!-- banner -->
+    <div id="slidey" style="display:none;">
+        <ul>
+           @foreach (var item in Model) {
+            <li><img src="@Url.Action("MoviesPhotos", "Movies", new { MovieID = item.MovieID })" title="album-name" class="img-responsive" alt=" "><p class='title'>@Html.DisplayFor(modelItem => item.MovieName)</p><p class='description'> @Html.DisplayFor(modelItem => item.MovieInformation)</p></li>
+
+           }
+        </ul>
+    </div>
+    <script src="~/Scripts/jquery.slidey.js"></script>
+    <script src="~/Scripts/jquery.dotdotdot.min.js"></script>
+    <script type="text/javascript">
+        $("#slidey").slidey({
+            interval: 8000,
+            listCount: 5,
+            autoplay: false,
+            showList: true
+        });
+        $(".slidey-list-description").dotdotdot();
+    </script>
+    <!-- //banner -->
+    <!-- banner-bottom -->
+    <div class="banner-bottom">
+        <div class="container">
+            <div class="w3_agile_banner_bottom_grid">
+                <div id="owl-demo" class="owl-carousel owl-theme">
+                    
+                    @foreach (var item in Model)
+                    {
+                    <div class="item">
+                        <div class="w3l-movie-gride-agile w3l-movie-gride-agile1">
+                            <a href="@Url.Action("Details", "Movies", new { id = item.MovieID })" class="hvr-shutter-out-horizontal">
+                                
+                                <img src="@Url.Action("MoviesPhotos", "Movies", new { MovieID = item.MovieID })" title="album-name" class="img-responsive" alt=" " >
+                                <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                            </a>
+                            <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                <div class="w3l-movie-text">
+                                    <h6><a href="@Url.Action("Details", "Movies", new { id = item.MovieID })">@Html.DisplayFor(modelItem => item.MovieName)</a></h6>
+                                </div>
+                                <div class="mid-2 agile_mid_2_home">
+                                    <p>@Html.DisplayFor(modelItem => item.MovieReleaseDate)</p>
+                                    <div class="block-stars">
+                                        <ul class="w3l-ratings">
+                                           @for (int i = 0; i < (int)Math.Ceiling(item.MovieGeneralScore / 2); i++)
+                                           {
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                           }
+
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="ribben">
+                                <p>NEW</p>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //banner-bottom -->
+    <!-- general -->
+   
+    <div class="general">
+        <h4 class="latest-text w3_latest_text">@movieMvc.Resources.Home.FeaturedMovies</h4>
+        <div class="container">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#rating" id="rating-tab" role="tab" data-toggle="tab" aria-controls="rating" aria-expanded="true">@movieMvc.Resources.Home.Score</a></li>
+                    <li role="presentation"><a href="#imdb" role="tab" id="imdb-tab" data-toggle="tab" aria-controls="imdb" aria-expanded="false">@movieMvc.Resources.Home.New</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                   
+                             
+                            <div role="tabpanel" class="tab-pane fade active in"  id="rating" aria-labelledby="rating-tab">
+
+                                @foreach (var item in @moviesOrderedByDescedingScore)
+                                {
+                            <div class="col-md-2 w3l-movie-gride-agile">
+                                <a href="@Url.Action("Details", "Movies", new { id = item.MovieID })" class="hvr-shutter-out-horizontal">
+                                    <img src="@Url.Action("MoviesPhotos", "Movies", new { MovieID = item.MovieID })" title="album-name" class="img-responsive" alt=" " />
+                                    <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                </a>
+                                <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                    <div class="w3l-movie-text">
+                                        <h6><a href="@Url.Action("Details", "Movies", new { id = item.MovieID })">@Html.DisplayFor(modelItem => item.MovieName)</a></h6>
+                                    </div>
+                                    <div class="mid-2 agile_mid_2_home">
+                                        <p>@Html.DisplayFor(modelItem => item.MovieReleaseDate)</p>
+                                        <div class="block-stars">
+                                            <ul class="w3l-ratings">
+                                                @for (int i = 0; i < (int)Math.Ceiling(item.MovieGeneralScore / 2); i++)
+                                                {
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="ribben">
+                                    <p>@movieMvc.Resources.Home.New</p>
+                                </div>
+                            </div>
+                                }
+
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="imdb" aria-labelledby="rating-tab">
+
+                                @foreach (var item in @moviesOrderedByDate)
+                                {
+                            <div class="col-md-2 w3l-movie-gride-agile">
+                                <a href="@Url.Action("Details", "Movies", new { id = item.MovieID })" class="hvr-shutter-out-horizontal">
+                                    <img src="@Url.Action("MoviesPhotos", "Movies", new { MovieID = item.MovieID })" title="album-name" class="img-responsive" alt=" " />
+                                    <div class="w3l-action-icon"><i class="fa fa-play-circle" aria-hidden="true"></i></div>
+                                </a>
+                                <div class="mid-1 agileits_w3layouts_mid_1_home">
+                                    <div class="w3l-movie-text">
+                                        <h6><a href="@Url.Action("Details", "Movies", new { id = item.MovieID })">@Html.DisplayFor(modelItem => item.MovieName)</a></h6>
+                                    </div>
+                                    <div class="mid-2 agile_mid_2_home">
+                                        <p>@Html.DisplayFor(modelItem => item.MovieReleaseDate)</p>
+                                        <div class="block-stars">
+                                            <ul class="w3l-ratings">
+                                                @for (int i = 0; i < (int)Math.Ceiling(item.MovieGeneralScore / 2); i++)
+                                                {
+                                            <li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="ribben">
+                                    <p>@movieMvc.Resources.Home.New</p>
+                                </div>
+                            </div>
+                                }
+
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+    <!-- //general -->
+    <!-- Latest-tv-f -->
+    
+    <!-- pop-up-box -->
+    <script src="~/Scripts/jquery.magnific-popup.js" type="text/javascript"></script>
+    <!--//pop-up-box -->
+    <div id="small-dialog" class="mfp-hide">
+        <iframe src="https://player.vimeo.com/video/164819130?title=0&byline=0"></iframe>
+    </div>
+    <div id="small-dialog1" class="mfp-hide">
+        <iframe src="https://player.vimeo.com/video/148284736"></iframe>
+    </div>
+    <div id="small-dialog2" class="mfp-hide">
+        <iframe src="https://player.vimeo.com/video/165197924?color=ffffff&title=0&byline=0&portrait=0"></iframe>
+    </div>
+    <script>
+                $(document).ready(function () {
+                    $('.w3_play_icon,.w3_play_icon1,.w3_play_icon2').magnificPopup({
+                        type: 'inline',
+                        fixedContentPos: false,
+                        fixedBgPos: true,
+                        overflowY: 'auto',
+                        closeBtnInside: true,
+                        preloader: false,
+                        midClick: true,
+                        removalDelay: 300,
+                        mainClass: 'my-mfp-zoom-in'
+                    });
+
+                });
+    </script>
+    <!-- //Latest-tv-series -->
+</body>

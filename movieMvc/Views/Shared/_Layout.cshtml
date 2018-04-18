@@ -1,0 +1,290 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FavoriFilm.com</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/Content/contactstyle.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/Content/faqstyle.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/Content/news.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/list-css/list.css" type="text/css" media="all" />
+
+
+    <link href="~/Content/single.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/medile.css" rel='stylesheet' type='text/css' />
+    <!-- banner-slider -->
+    <link href="~/Content/jquery.slidey.min.css" rel="stylesheet">
+    <!-- //banner-slider -->
+    <!-- pop-up -->
+    <link href="~/Content/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //pop-up -->
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <!-- //js -->
+    <!-- banner-bottom-plugin -->
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+    <script src="~/Scripts/owl.carousel.js"></script>
+    <script>
+	$(document).ready(function() {
+		$("#owl-demo").owlCarousel({
+
+		  autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+		  items : 5,
+		  itemsDesktop : [640,4],
+		  itemsDesktopSmall : [414,3]
+
+		});
+
+        });
+
+    $(document).ready(function () {
+        $("#owl-demo2").owlCarousel({
+
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+
+            items: 5,
+            itemsDesktop: [640, 4],
+            itemsDesktopSmall: [414, 3]
+
+        });
+
+    });
+
+
+    </script>
+    <!-- //banner-bottom-plugin -->
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="~/Scripts/move-top.js"></script>
+    <script type="text/javascript" src="~/Scripts/easing.js"></script>
+    <script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+    </script>
+    <!-- start-smoth-scrolling -->
+
+
+
+
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="w3layouts_logo">
+                <a><h1>Favori<span>Film.com</span></h1></a>
+            </div>
+            <div class="w3_search">
+                <form action="#" method="post">
+                    <input type="text" name="Search" placeholder="Aranacak şeyi yazın" required="">
+                    <input type="submit" value="Ara">
+                </form>
+            </div>
+            <button type="button" class="navbar-toggle collapsed " data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" style="color: #d4dccd;border:1px solid orange;">
+                <span class="sr-only" >Toggle navigation</span>
+                <span class="icon-bar"style="color: #d4dccd;border:1px solid orange;"></span>
+                <span class="icon-bar"style="color: #d4dccd;border:1px solid orange;"></span>
+                <span class="icon-bar"style="color: #d4dccd;border:1px solid orange;"></span>
+            </button>
+           
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-2">
+                
+                @Html.Partial("_LoginPartial")
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- bootstrap-pop-up -->
+    <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Login & Register
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <section>
+
+                    
+
+                           
+                       
+
+</section>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.toggle').click(function () {
+            // Switches the Icon
+            $(this).children('i').toggleClass('fa-pencil');
+            // Switches the forms
+            $('.form').animate({
+                height: "toggle",
+                'padding-top': 'toggle',
+                'padding-bottom': 'toggle',
+                opacity: "toggle"
+            }, "slow");
+        });
+    </script>
+    <!-- //bootstrap-pop-up -->
+    <!-- //bootstrap-pop-up -->
+    <!-- nav -->
+    <div class="movies_nav">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header navbar-left">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                    <nav>
+                        <ul class="nav navbar-nav">
+                            <li class="active">@Html.ActionLink(movieMvc.Resources.Home.Main, "Index", "Home")</li>
+                         
+                            <li>@Html.ActionLink(movieMvc.Resources.Home.Lists, "Lists", "Lists")</li>
+                            <li>@Html.ActionLink(movieMvc.Resources.Home.News, "Index2", "News")</li>
+                           
+                            <li>
+                            <li>@Html.ActionLink(movieMvc.Resources.Home.ShortCodes, "ShortCodes", "Home")</li>
+
+                            <li>@Html.ActionLink(movieMvc.Resources.Home.aZList, "List", "Home")</li>
+                            <li>@Html.ActionLink("English", "Change", "Home", new { LanguageAbbrevation = "en" }, null)</li>
+                            <li>@Html.ActionLink("Türkçe", "Change", "Home", new { LanguageAbbrevation = "tr" }, null)</li>
+                        </ul>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- //nav -->
+
+    <div class="general_social_icons">
+        <nav class="social">
+            <ul>
+                <li class="w3_twitter"><a href="#">Twitter <i class="fa fa-twitter"></i></a></li>
+                <li class="w3_facebook"><a href="#">Facebook <i class="fa fa-facebook"></i></a></li>
+                <li class="w3_dribbble"><a href="#">Dribbble <i class="fa fa-dribbble"></i></a></li>
+                <li class="w3_g_plus"><a href="#">Google+ <i class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="w3ls_footer_grid">
+                <div class="col-md-6 w3ls_footer_grid_left">
+                    <div class="w3ls_footer_grid_left1">
+                        <h2>@movieMvc.Resources.Home.followUs</h2>
+                        <div class="w3ls_footer_grid_left1_pos">
+                            <form action="#" method="post">
+                                <input type="email" name="email" placeholder="@movieMvc.Resources.Home.YourMailAddress" required="">
+                                <input type="submit" value="Send" placeholder="@movieMvc.Resources.Home.Send">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 w3ls_footer_grid_right">
+                    <a><h2>Favori<span>Film.com</span></h2></a>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="col-md-5 w3ls_footer_grid1_left">
+                <p>&copy; 2016 One Movies. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+            </div>
+            <div class="col-md-7 w3ls_footer_grid1_right">
+                <ul>
+                    <li>
+                       @Html.ActionLink(movieMvc.Resources.Home.Movies, "Genres", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Faq", "Faq", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink(@movieMvc.Resources.Home.Horror, "Horror", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink(movieMvc.Resources.Home.Movies, "Genres", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink(movieMvc.Resources.Home.Comedy, "Comedy", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink(movieMvc.Resources.Home.Icons, "Icons", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink(movieMvc.Resources.Home.ContactUs, "Contact2", "Home")
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //footer -->
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //Bootstrap Core JavaScript -->
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
